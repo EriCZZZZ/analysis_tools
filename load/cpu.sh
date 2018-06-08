@@ -5,7 +5,6 @@ cpu_core=0
 
 # cal cpu core number
 tmp=`cat /proc/cpuinfo | grep processor`
-
 OLD_IFS="$IFS"
 IFS=":"
 arr=( $tmp )
@@ -14,11 +13,8 @@ for s in ${arr[@]}
 do
 	((cpu_core=$cpu_core+1))
 done
-
 ((cpu_core=cpu_core/2))
-
 echo "核数"$cpu_core
-
 echo "=========="
 
 # vmstat
