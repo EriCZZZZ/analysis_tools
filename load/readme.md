@@ -1,0 +1,3 @@
+- top
+- vmstat
+- w

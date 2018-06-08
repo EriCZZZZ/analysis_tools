@@ -2,7 +2,8 @@
 
 # init vars
 OPTIND=1
-usage="usage: $0 -d curl_d -s curl_s\n"
+usage="usage: $0 -b <cookies_string/cookies_file> -d curl_d -s curl_s\n"
+cookies=""
 data=""
 url=""
 format="\
@@ -16,8 +17,11 @@ DNS解析		%{time_namelookup}s\n\
 总时间		%{time_total}s\n\
 "
 
-while getopts :d:s: OPT; do
+while getopts bd:s: OPT; do
     case $OPT in
+	b)
+		cookies=$OPTARG
+		;;
         d) 
 		data=$OPTARG
 		;;
@@ -37,6 +41,7 @@ done
 
 # do curl
 curl -w "${format}\n" \
+-b "$cookies" \
 -d "$data" \
 -o /dev/null \
 -s "$url"
